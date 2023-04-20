@@ -14,8 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); //id
+            $table->string("title")->unique(); //titolo
+            $table->string("client"); //cliente
+            $table->text("description"); //descrizione
+            $table->text("url"); //url
+            $table->string("slug"); //slug
+            $table->softDeletes(); //soft delete
+            $table->timestamps(); //data di creazione e di modifica
         });
     }
 
