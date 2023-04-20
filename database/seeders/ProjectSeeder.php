@@ -23,8 +23,8 @@ class ProjectSeeder extends Seeder
             $newProject->title = $faker->unique()->sentence($faker->numberBetween(3, 5)); //titolo
             $newProject->client = $faker->word(); //cliente
             $newProject->description = $faker->text(200); //descrizione
-            $newProject->url = $faker->url(); //url
             $newProject->slug = Str::slug($newProject->title, "-"); //slug
+            $newProject->url = "http://www.projects.com/" . $newProject->slug; //url
             $newProject->save(); //salvo i dati
         }
     }
