@@ -36,7 +36,7 @@
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->client }}</td>
                         <td>{{ $project->description }}</td>
-                        <td>{{ $project->url }}</td>
+                        <td><a href="{{ route("projects.show", $project) }}">{{ $project->url }}</a></td>
                         <td class="d-flex flex-column gap-2">
                             <a class="btn btn-primary" href="">Modifica</a>
                             <form action="" method="POST">
