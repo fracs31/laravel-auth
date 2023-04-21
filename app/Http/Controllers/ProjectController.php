@@ -64,7 +64,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view("projects.edit", compact("project")); //restituisco la vista "edit"
     }
 
     /**
@@ -76,7 +76,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated(); //valido i dati
+        $data["url"] = "http://www.projects.com/" . $data["title"]; //url
+        $data["slug"] = Str::slug($data["title"], "-"); //slug
+        $project->update($data); //creo un nuovo progetto
+        return to_route("projects.show", $project); //restistuisco la vista "index"
     }
 
     /**
