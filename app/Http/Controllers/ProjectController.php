@@ -42,7 +42,7 @@ class ProjectController extends Controller
         $data["url"] = "http://www.projects.com/" . $data["title"]; //url
         $data["slug"] = Str::slug($data["title"], "-"); //slug
         $newProject = Project::create($data); //creo un nuovo progetto
-        return to_route("projects.show", $newProject); //restistuisco la vista "index"
+        return to_route("projects.show", $newProject); //restistuisco la rotta "show"
     }
 
     /**
@@ -80,7 +80,7 @@ class ProjectController extends Controller
         $data["url"] = "http://www.projects.com/" . $data["title"]; //url
         $data["slug"] = Str::slug($data["title"], "-"); //slug
         $project->update($data); //creo un nuovo progetto
-        return to_route("projects.show", $project); //restistuisco la vista "index"
+        return to_route("projects.show", $project); //restistuisco la rotta "show"
     }
 
     /**
@@ -91,6 +91,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete(); //cancello il progetto
+        return to_route("projects.index"); //restistuisco alla rotta "index"
     }
 }

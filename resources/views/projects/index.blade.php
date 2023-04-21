@@ -39,8 +39,10 @@
                         <td><a href="{{ route("projects.show", $project) }}">{{ $project->url }}</a></td>
                         <td class="d-flex flex-column gap-2">
                             <a class="btn btn-primary" href="{{ route("projects.edit", $project) }}">Modifica</a>
-                            <form action="" method="POST">
+                            <form action="{{ route("projects.destroy", $project) }}" method="POST">
                                 @csrf
+                                {{-- Metodo --}}
+                                @method("DELETE")
                                 <button class="btn btn-danger" type="submit">Cancella</button>
                             </form>
                         </td>
