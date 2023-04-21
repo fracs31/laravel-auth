@@ -11,7 +11,7 @@
                 Progetti
             </h1>
             {{-- Nuovo progetto --}}
-            <form action="">
+            <form action="{{ route("projects.create") }}" method="GET">
                 @csrf
                 <button class="btn btn-primary" type="submit">Nuovo progetto</button>
             </form>

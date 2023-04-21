@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Str; //str
 
 class ProjectController extends Controller
 {
@@ -26,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view("projects.create"); //restituisco la vista "create"
     }
 
     /**
@@ -37,7 +38,11 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated(); //valido i dati
+        $data["url"] = "http://www.projects.com/" . $data["title"]; //url
+        $data["slug"] = Str::slug($data["title"], "-"); //slug
+        $newProject = Project::create($data); //creo un nuovo progetto
+        return to_route("projects.show", $newProject); //restistuisco la vista "index"
     }
 
     /**
