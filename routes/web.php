@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     //Rotte
     Route::resource('projects', ProjectController::class)->parameters([
         'projects' => 'project:slug'
-    ]);
+    ])->withTrashed();
 });
 
 require __DIR__.'/auth.php';
