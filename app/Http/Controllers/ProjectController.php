@@ -83,6 +83,15 @@ class ProjectController extends Controller
         return to_route("projects.show", $project); //restistuisco la rotta "show"
     }
 
+    //Restore
+    public function restore(Project $project) {
+        //Se il progetto è stato cancellato
+        if ($project->trashed()) {
+            $project->restore(); //ripristino il progetto
+        }
+        return back(); //torno nella pagina precedente
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -91,7 +100,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $project->delete(); //cancello il progetto
+        //Se il progetto è stato eliminato
+        if ($project->trashed()) {
+            $project->forceDelete(); //effettuo una cancellazione definitiva
+        } else { //altrimenti
+            $project->delete(); //effettuo una soft delete
+        }
         return to_route("projects.index"); //restistuisco alla rotta "index"
     }
 }

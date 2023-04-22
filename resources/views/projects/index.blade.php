@@ -60,7 +60,7 @@
                             {{-- Modifica --}}
                             <a class="btn btn-warning mb-2 w-100" href="{{ route("projects.edit", $project) }}">Modifica</a>
                             {{-- Cancella --}}
-                            <form action="{{ route("projects.destroy", $project) }}" method="POST">
+                            <form class="mb-2" action="{{ route("projects.destroy", $project) }}" method="POST">
                                 {{-- Cross-Site Request Forgery --}}
                                 @csrf
                                 {{-- Metodo --}}
@@ -68,6 +68,16 @@
                                 {{-- Bottone --}}
                                 <button class="btn btn-danger w-100" type="submit">Cancella</button>
                             </form>
+                            {{-- Se il progetto è stato cancellato --}}
+                            @if ($project->trashed())
+                                {{-- Ripristina --}}
+                                <form action="{{ route("projects.restore", $project) }}" method="POST">
+                                    {{-- Cross-Site Request Forgery --}}
+                                    @csrf
+                                    {{-- Bottone --}}
+                                    <button class="btn btn-success w-100" type="submit">Ripristina</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
