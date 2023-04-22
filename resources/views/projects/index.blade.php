@@ -21,6 +21,7 @@
             {{-- Testa --}}
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Titolo</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Descrizione</th>
@@ -36,6 +37,8 @@
                 {{-- Ciclo --}}
                 @foreach ($projects as $project)
                     <tr>
+                        {{-- ID --}}
+                        <td>{{ $project->id }}</td>
                         {{-- Titolo --}}
                         <td>{{ $project->title }}</td>
                         {{-- Cliente --}}
