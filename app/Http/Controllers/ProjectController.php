@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str; //str
+use Illuminate\Http\Request; //request
 
 class ProjectController extends Controller
 {
@@ -14,9 +15,15 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::withTrashed()->get(); //prendo i progetti dal database
+        $trashed = $request->input("trashed"); //cestino
+        //Se viene cliccato il cestino
+        if ($trashed === "1") {
+            $projects = Project::onlyTrashed()->get(); //prendo i progetti che sono stati cancellati
+        } else { //altrimenti
+            $projects = Project::all(); //prendo tutti i progetti del database tranne quelli cancellati
+        }
         return view("projects.index", compact("projects")); //restituisco la vista "index"
     }
 

@@ -10,11 +10,13 @@
             <h1>
                 Progetti
             </h1>
-            {{-- Nuovo progetto --}}
-            <form action="{{ route("projects.create") }}" method="GET">
-                @csrf
-                <button class="btn btn-primary" type="submit">Nuovo progetto</button>
-            </form>
+            {{-- Bottoni --}}
+            <div class="d-flex gap-2">
+                {{-- Nuovo progetto --}}
+                <a class="btn btn-primary" href="{{ route("projects.create") }}">Nuovo progetto</a>
+                {{-- Cestino --}}
+                <a class="btn btn-secondary" href="{{ route("projects.index", ["trashed" => true]) }}">Cestino</a>
+            </div>
         </div>
         {{-- Tabella --}}
         <table class="table">
