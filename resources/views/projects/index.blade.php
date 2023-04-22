@@ -25,6 +25,9 @@
                     <th scope="col">Cliente</th>
                     <th scope="col">Descrizione</th>
                     <th scope="col">URL</th>
+                    <th scope="col">Data di cancellazione</th>
+                    <th scope="col">Data di creazione</th>
+                    <th scope="col">Data di aggiornamento</th>
                     <th scope="col">Opzioni</th>
                 </tr>
             </thead>
@@ -33,17 +36,34 @@
                 {{-- Ciclo --}}
                 @foreach ($projects as $project)
                     <tr>
+                        {{-- Titolo --}}
                         <td>{{ $project->title }}</td>
+                        {{-- Cliente --}}
                         <td>{{ $project->client }}</td>
+                        {{-- Descrizione --}}
                         <td>{{ $project->description }}</td>
+                        {{-- URL --}}
                         <td><a href="{{ route("projects.show", $project) }}">{{ $project->url }}</a></td>
-                        <td class="d-flex flex-column gap-2">
-                            <a class="btn btn-primary" href="{{ route("projects.edit", $project) }}">Modifica</a>
+                        {{-- Data di cancellazione --}}
+                        <td>{{ $project->deleted_at }}</td>
+                        {{-- Data di creazione --}}
+                        <td>{{ $project->created_at }}</td>
+                        {{-- Data di aggiornamento --}}
+                        <td>{{ $project->updated_at }}</td>
+                        {{-- Opzioni --}}
+                        <td>
+                            {{-- Mostra --}}
+                            <a class="btn btn-primary mb-2 w-100" href="{{ route("projects.show", $project) }}">Mostra</a>
+                            {{-- Modifica --}}
+                            <a class="btn btn-warning mb-2 w-100" href="{{ route("projects.edit", $project) }}">Modifica</a>
+                            {{-- Cancella --}}
                             <form action="{{ route("projects.destroy", $project) }}" method="POST">
+                                {{-- Cross-Site Request Forgery --}}
                                 @csrf
                                 {{-- Metodo --}}
                                 @method("DELETE")
-                                <button class="btn btn-danger" type="submit">Cancella</button>
+                                {{-- Bottone --}}
+                                <button class="btn btn-danger w-100" type="submit">Cancella</button>
                             </form>
                         </td>
                     </tr>
