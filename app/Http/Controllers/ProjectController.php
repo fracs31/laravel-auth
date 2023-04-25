@@ -96,6 +96,7 @@ class ProjectController extends Controller
         //Se il progetto è stato cancellato
         if ($project->trashed()) {
             $project->restore(); //ripristino il progetto
+            request()->session()->flash("message", "Il post " . $project->title . " è stato ripristinato"); //messaggio di ripristino del progetto
         }
         return back(); //torno nella pagina precedente
     }

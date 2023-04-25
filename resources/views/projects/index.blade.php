@@ -2,6 +2,16 @@
 @extends("layouts.app")
 {{-- Content --}}
 @section('content')
+    {{-- Se un progetto è stato ripristinato --}}
+    @if (request()->session()->exists("message"))
+        {{-- Container --}}
+        <div class="container">
+            {{-- Messaggio --}}
+            <div class="alert alert-primary" role="alert">
+                {{ request()->session()->pull("message") }}
+            </div>
+        </div>
+    @endif
     {{-- Container --}}
     <div class="container">
         {{-- Div --}}
