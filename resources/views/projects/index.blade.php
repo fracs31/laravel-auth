@@ -21,7 +21,7 @@
                     {{-- Altrimenti --}}
                     @else
                     {{-- Cestino --}}
-                    <a class="btn btn-secondary" href="{{ route("projects.index", ["trashed" => true]) }}">Cestino</a>
+                    <a class="btn btn-secondary" href="{{ route("projects.index", ["trashed" => true]) }}">Cestino ({{ $num_of_trashed }})</a>
                 @endif
             </div>
         </div>

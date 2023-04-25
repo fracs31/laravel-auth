@@ -18,13 +18,14 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $trashed = $request->input("trashed"); //cestino
+        $num_of_trashed = Project::onlyTrashed()->count(); //numeri di progetti cestinati
         //Se viene cliccato il cestino
         if ($trashed === "1") {
             $projects = Project::onlyTrashed()->get(); //prendo i progetti che sono stati cancellati
         } else { //altrimenti
             $projects = Project::all(); //prendo tutti i progetti del database tranne quelli cancellati
         }
-        return view("projects.index", compact("projects")); //restituisco la vista "index"
+        return view("projects.index", compact("projects", "num_of_trashed")); //restituisco la vista "index"
     }
 
     /**
