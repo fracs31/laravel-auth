@@ -14,8 +14,15 @@
             <div class="d-flex gap-2">
                 {{-- Nuovo progetto --}}
                 <a class="btn btn-primary" href="{{ route("projects.create") }}">Nuovo progetto</a>
-                {{-- Cestino --}}
-                <a class="btn btn-secondary" href="{{ route("projects.index", ["trashed" => true]) }}">Cestino</a>
+                {{-- Se è presente il parametro "trashed" nella query string --}}
+                @if (request("trashed"))
+                    {{-- Index --}}
+                    <a class="btn btn-secondary" href="{{ route("projects.index") }}">Tutti i progetti</a>    
+                    {{-- Altrimenti --}}
+                    @else
+                    {{-- Cestino --}}
+                    <a class="btn btn-secondary" href="{{ route("projects.index", ["trashed" => true]) }}">Cestino</a>
+                @endif
             </div>
         </div>
         {{-- Tabella --}}
